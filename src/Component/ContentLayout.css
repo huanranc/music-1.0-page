@@ -1,0 +1,14 @@
+.card {
+  border:0;
+  box-shadow: none;
+  margin: 10px;
+  margin-bottom: 40px;
+}
+.card:hover {
+  border:0;
+  box-shadow: none;
+}
+.card-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
