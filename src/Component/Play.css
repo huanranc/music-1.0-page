@@ -11,7 +11,6 @@
 }
 
 .play-control {
-  width: 30%;
   margin: 0 30px;
 }
 
@@ -21,4 +20,14 @@
 
 .play-progress {
   width: 50%;
+  border-radius: 15px;
+  background: #595a5a;
+  height: 2px;
+  line-height: 20px;
+  margin: 0 30px;
+}
+
+.progress-nav {
+  height: 100%;
+  background: #2ebd59;
 }
