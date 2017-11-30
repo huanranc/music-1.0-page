@@ -17,7 +17,7 @@ class ContentLayout extends Component {
     var myFetchOptions ={
       method:'GET'
     };
-    fetch("http://route.showapi.com/1143-7?showapi_appid=51102&typeId=102&page=1&showapi_sign=cc9fdfc7e1824302b9b645a92f0646eb")
+    fetch("http://route.showapi.com/1143-7?showapi_appid=51102&typeId=102&page=1&showapi_sign=cc9fdfc7e1824302b9b645a92f0646eb",myFetchOptions)
     .then(response=>response.json())
     .then(json=>this.setState({songs:json}));
   };
@@ -30,11 +30,11 @@ class ContentLayout extends Component {
       <Col key={index} span={4}>
         <div className="card">
           <div className="card-image">
-            <img alt="example" width="100%" src={songsItem.albumLogo} />
+            <img alt="example" width="100%" src={songsItem.showapi_res_body.pagebean['contentlist'].albumLogo} />
           </div>
           <div className="card-body" >
-            <h3>{songsItem.songName}</h3>
-            <p>{songsItem.songName}</p>
+            <h3>{songsItem.showapi_res_body.pagebean['contentlist'].songName}</h3>
+            <p>{songsItem.showapi_res_body.pagebean['contentlist'].songName}</p>
           </div>
         </div>
       </Col>
