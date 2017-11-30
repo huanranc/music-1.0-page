@@ -17,7 +17,7 @@ class ContentLayout extends Component {
     var myFetchOptions ={
       method:'GET'
     };
-    fetch("https://route.showapi.com/1143-2?page=1&showapi_appid=51102&showapi_test_draft=false&showapi_timestamp=20171130015937&song_type=real-time&showapi_sign=4bf9544ec49e018dffba7f0eb654fcf3")
+    fetch("http://route.showapi.com/1143-7?showapi_appid=51102&typeId=102&page=1&showapi_sign=cc9fdfc7e1824302b9b645a92f0646eb")
     .then(response=>response.json())
     .then(json=>this.setState({songs:json}));
   };
@@ -30,11 +30,11 @@ class ContentLayout extends Component {
       <Col key={index} span={4}>
         <div className="card">
           <div className="card-image">
-            <img alt="example" width="100%" src={songsItem.showapi_res_body.albumLogo} />
+            <img alt="example" width="100%" src={songsItem.albumLogo} />
           </div>
           <div className="card-body" >
-            <h3>{songsItem.showapi_res_body.songName}</h3>
-            <p>{songsItem.showapi_res_body.songName}</p>
+            <h3>{songsItem.songName}</h3>
+            <p>{songsItem.songName}</p>
           </div>
         </div>
       </Col>
