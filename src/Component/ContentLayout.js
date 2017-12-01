@@ -13,7 +13,7 @@ class ContentLayout extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var myFetchOptions ={
       method:'GET'
     };
@@ -30,11 +30,11 @@ class ContentLayout extends Component {
       <Col key={index} span={4}>
         <div className="card">
           <div className="card-image">
-            <img alt="example" width="100%" src={songsItem.showapi_res_body.pagebean['contentlist'].albumLogo} />
+            <img alt="example" width="100%" src={songsItem.albumLogo} />
           </div>
           <div className="card-body" >
-            <h3>{songsItem.showapi_res_body.pagebean['contentlist'].songName}</h3>
-            <p>{songsItem.showapi_res_body.pagebean['contentlist'].songName}</p>
+            <h3>{songsItem.songName}</h3>
+            <p>{songsItem.songName}</p>
           </div>
         </div>
       </Col>
