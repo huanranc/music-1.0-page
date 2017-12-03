@@ -5,10 +5,18 @@ import MenuLayout from './MenuLayout';
 import ContentLayout from './ContentLayout';
 import Play from './Play';
 import './MainLayout.css';
+import {musicList} from './txt';
 
 const { Header, Sider, Content } = Layout;
 
 export default class MainLayout extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      musicItem:musicList,
+      musicIndex:musicList[0]
+    }
+  }
   render() {
     return (
       <Layout>
@@ -25,10 +33,10 @@ export default class MainLayout extends Component {
               margin: 0,
               backgroundColor: 'white'
             }}>
-             <ContentLayout/>
+             <ContentLayout musicItem={this.state.musicItem}/>
             </Content>
           </Layout>
-          <Play />
+          <Play musicIndex={this.state.musicIndex}/>
         </Layout>
       </Layout>
     );

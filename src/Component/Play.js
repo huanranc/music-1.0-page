@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Icon from 'antd/lib/icon';
 import Avatar from 'antd/lib/avatar';
-import musicplay from './fly.mp3';
 import './Play.css';
 
 //const src='./fly.mp3';
@@ -12,14 +11,18 @@ class Play extends Component {
     this.state = {
       isPlay: false,
       currentTime: 0,
-      duration:0
+      duration:0,
+      progress:0,
+      volume: 100 + '%'
     }
     this.handlePlayerClick = this.handlePlayerClick.bind(this);
     this.timeStart = this.timeStart.bind(this);
     this.controlAudio= this.controlAudio.bind(this);
+    this.handleProgress = this.handleProgress.bind(this);
   }
 
-componentDidMount(){
+componentDillMount(){
+
 }
 
 timeStart(time) {
@@ -38,10 +41,12 @@ timeStart(time) {
   return minute+symbol+second
 }
 
+
 controlAudio(){
   this.setState({
-    duration:this.audioplay.duration,
-    currentTime:this.audioplay.currentTime
+    duration:this.refs.audioplay.duration,
+    currentTime:this.refs.audioplay.currentTime,
+    progress:this.state.currentTime / this.state.duration * 100 + '%'
   });
 }
 
@@ -51,33 +56,42 @@ handlePlayerClick() {
     //duration:this.audioplay.duration
   }));
   if(!this.state.isPlay) {
-    this.audioplay.play();
+    this.refs.audioplay.play();
     }else {
-      this.audioplay.pause();
-      console.log(this.audioplay.currentTime);
-      console.log((parseInt(this.audioplay.currentTime))%100);
+      this.refs.audioplay.pause();
     }
 
+}
+
+handleProgress(e){
+  let settedProgress = (e.screenX - this.refs.propgressBar.getBoundingClientRect().left) / this.refs.propgressBar.clientWidth;
+  console.log(settedProgress);
 }
   render(){
     return(
       <div className="play">
-        <audio id="audio" preload="auto" src={musicplay} onTimeUpdate={ this.controlAudio}  ref={(audio) => {this.audioplay=audio;}}>
+        <audio id="audio" preload="true" src={this.props.musicIndex.file} onTimeUpdate={ this.controlAudio}  ref="audioplay">
           您的浏览器不支持 audio 与元素。
         </audio>
-        <Avatar shape="square" size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <Avatar shape="square" size="large" src={this.props.musicIndex.cover} />
         <div className="play-control">
-            <span><Icon type="fast-backward"  style={{ fontSize: 24, color: '#fff' }}/></span>
+            <span><Icon type="fast-backward"  style={{ fontSize: 20, color: '#fff' }}/></span>
             <span  onClick={this.handlePlayerClick} >
                 {this.state.isPlay? <Icon  type="pause"  style={{ fontSize: 28, color: '#fff' }} />:<Icon type="caret-right" style={{ fontSize: 28, color: '#fff' }} /> }
             </span>
-           <span><Icon type="fast-forward" style={{ fontSize: 24, color: '#fff' }}/></span>
+           <span><Icon type="fast-forward" style={{ fontSize: 20, color: '#fff' }}/></span>
         </div>
         <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.currentTime)}</span>
-        <div className="play-progress">
-          <div className="progress-nav" style={{ width:10  }}></div>
+        <div className="play-progress" onClick={this.handleProgress} ref="propgressBar">
+          <div className="progress-nav" style={{ width: this.state.progress }}></div>
         </div>
         <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.duration)}</span>
+        <div className="volume-progress">
+           <Icon type="sound" style={{ fontSize: 20, color: '#fff' }} />
+           <div className="play-progress">
+              <div className="progress-nav" style={{ width: this.state.volume }}></div>
+         </div>
+        </div>
       </div>
     );
   }

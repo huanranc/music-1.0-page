@@ -24,10 +24,40 @@
   background: #595a5a;
   height: 2px;
   line-height: 20px;
-  margin: 0 30px;
+  margin: 0 15px;
+  cursor: pointer;
 }
 
 .progress-nav {
+  position: relative;
   height: 100%;
   background: #2ebd59;
+}
+
+.progress-nav::after {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.volume-progress {
+  margin: 0 30px;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.volume-progress  .play-progress {
+  width: 100%;
+}
+
+.volume-progress .progress-nav {
+  position: relative;
+  height: 100%;
+  background: #fff;
 }
