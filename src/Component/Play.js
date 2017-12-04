@@ -22,7 +22,7 @@ class Play extends Component {
   }
 
 componentDillMount(){
-
+  let audioplay = this.refs.audioplay;
 }
 
 timeStart(time) {
@@ -60,12 +60,15 @@ handlePlayerClick() {
     }else {
       this.refs.audioplay.pause();
     }
-
 }
 
 handleProgress(e){
-  let settedProgress = (e.screenX - this.refs.propgressBar.getBoundingClientRect().left) / this.refs.propgressBar.clientWidth;
-  console.log(settedProgress);
+let settedProgress = (e.screenX - this.refs.propgressBar.getBoundingClientRect().left) / this.refs.propgressBar.clientWidth;
+ console.log(settedProgress);
+ console.log(this.refs.audioplay.currentTime);
+ console.log(this.refs.audioplay.duration);
+ console.log(settedProgress*this.refs.audioplay.duration);
+this.onProgress&&this.onProgress(settedProgress);
 }
   render(){
     return(
@@ -82,7 +85,7 @@ handleProgress(e){
            <span><Icon type="fast-forward" style={{ fontSize: 20, color: '#fff' }}/></span>
         </div>
         <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.currentTime)}</span>
-        <div className="play-progress" onClick={this.handleProgress} ref="propgressBar">
+        <div className="play-progress" onClick={this.handleProgress} ref="propgressBar"  onClick={this.timer}>
           <div className="progress-nav" style={{ width: this.state.progress }}></div>
         </div>
         <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.duration)}</span>

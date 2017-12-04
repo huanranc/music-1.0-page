@@ -35,7 +35,7 @@ class ContentLayout extends Component {
         </li>
     });
     return(
-      <div >
+      <div className="content-layout">
         <h2>新碟首发</h2>
         <ul className="card-row">{cols}</ul>
       </div>
